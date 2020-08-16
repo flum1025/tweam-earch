@@ -19,10 +19,12 @@ import (
 type server struct {
 	config *config.Config
 	app    *app.App
+	debug  bool
 }
 
 func NewServer(
 	config *config.Config,
+	debug bool,
 ) (*server, error) {
 	app, err := app.NewApp(config)
 	if err != nil {
@@ -32,6 +34,7 @@ func NewServer(
 	return &server{
 		config: config,
 		app:    app,
+		debug:  debug,
 	}, nil
 }
 

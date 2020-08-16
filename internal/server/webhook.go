@@ -17,10 +17,14 @@ type event struct {
 func (s *server) webhook(w http.ResponseWriter, r *http.Request) {
 	var params event
 
-	_, err := parse(r.Body, &params)
+	body, err := parse(r.Body, &params)
 	if err != nil {
 		log.Println(fmt.Sprintf("[ERROR] failed to parse body: %v", err))
 		return
+	}
+
+	if s.debug {
+		log.Println(fmt.Sprintf("[DEBUG] %s", string(body)))
 	}
 
 	err = s.app.Handle(params.ForUserID, params.TweetCreateEvents)

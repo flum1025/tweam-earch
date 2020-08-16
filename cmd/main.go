@@ -11,6 +11,7 @@ import (
 func main() {
 	configPath := flag.String("config", "", "config path")
 	port := flag.Int("port", 3000, "port")
+	debug := flag.Bool("debug", false, "debug")
 	flag.Parse()
 
 	config, err := config.NewConfig(*configPath)
@@ -18,7 +19,7 @@ func main() {
 		log.Fatalf("failed to get config: %v", err)
 	}
 
-	srv, err := server.NewServer(config)
+	srv, err := server.NewServer(config, *debug)
 	if err != nil {
 		log.Fatalf("failed to initialize server: %v", err)
 	}

@@ -75,6 +75,7 @@ func (a *App) Handle(userID string, tweets []twitter.Tweet) error {
 	if len(attachments) > 0 {
 		_, _, err := client.PostMessage(
 			account.Slack.Channel,
+			slack.MsgOptionUsername("Earch2"),
 			slack.MsgOptionAttachments(attachments...),
 			slack.MsgOptionIconEmoji(account.Slack.UserIcon),
 		)
